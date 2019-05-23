@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project InitialTargets="CopyCvDllFiles">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <OPENCV_DIR>$(MSBuildThisFileDirectory)\</OPENCV_DIR>
+    <OPENCV_LIB>$(OPENCV_DIR)lib\</OPENCV_DIR>
+	<OPENCV_INC>$(OPENCV_DIR)include\</OPENCV_DIR>
+	<OPENCV_BIN>$(OPENCV_DIR)bin\</OPENCV_DIR>
+    <OPENCV_DLL_SYGN>opencv_world*.dll</OPENCV_DLL_SYGN>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>OpenCV</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies Condition="('$(Configuration)'=='LocalRelease' Or '$(Configuration)'=='LocalDebug') Or ('$(Configuration)'=='NativeRelease' Or '$(Configuration)'=='Release')">opencv_world330.lib;%(AdditionalDependencies)</AdditionalDependencies>
+	  <AdditionalDependencies Condition="('$(Configuration)'=='Debug' Or '$(Configuration)'=='NativeDebug')">opencv_world330d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OPENCV_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(OPENCV_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="OPENCV_DIR">
+      <Value>$(OPENCV_DIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OPENCV_DLL_SYGN">
+      <Value>$(OPENCV_DLL_SYGN)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+  <Target Name="CopyCvDllFiles" Condition="'$(SkipDataFiles)' != True">
+    <ItemGroup>
+      <CvDllFile Include="$(OPENCV_BIN)$(OPENCV_DLL_SYGN)" />
+    </ItemGroup>
+    <Message Text="Coping OpenCV dll files" />
+    <Copy SourceFiles="@(CvDllFile)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
