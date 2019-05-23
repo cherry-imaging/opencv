@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>Cherry.OpenCV</id>
+    <version>{VERSION}</version>
+    <title>OpenCV Package</title>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>OpenCV for Cherry Imaging</description>
+    <releaseNotes>{SETUPNOTES}</releaseNotes>
+    <copyright>Copyright 2018 CompanyLtd</copyright>
+    <dependencies>
+    </dependencies>
+    <summary> OpenCV for Cherry Imaging </summary>
+  </metadata>
+  <files>
+  </files>
+</package>
