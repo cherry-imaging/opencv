@@ -2,10 +2,11 @@
 <package>
   <metadata>
     <id>Cherry.OpenCV</id>
-    <version>Version</version>
+    <version>$Version$</version>
+    <authors>Cherry Imaging</authors>
     <title>OpenCV Package</title>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>OpenCV for Cherry Imaging</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>    
     <releaseNotes>ReleaseNotes</releaseNotes>
     <copyright>Copyright</copyright>
     <dependencies>
@@ -13,9 +14,9 @@
     <summary> OpenCV for Cherry Imaging </summary>
   </metadata>
   <files>
-    <file src="install\include\**" target="build\include" />
-    <file src="install\lib\**" target="build\lib" />
-    <file src="install\bin\**" target="build\bin" />
+    <file src="install\include\**" target="native\include" />
+    <file src="install\artifacts\*.lib" target="native\lib" />
+    <file src="install\artifacts\*.dll" target="native\bin" />
     <file src="install\*.props" target="build" />
   </files>
 </package>
