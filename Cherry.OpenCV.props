@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project InitialTargets="CopyCvDllFiles">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <OPENCV_DIR>$(MSBuildThisFileDirectory)\</OPENCV_DIR>
-    <OPENCV_LIB>$(OPENCV_DIR)lib\</OPENCV_DIR>
-	<OPENCV_INC>$(OPENCV_DIR)include\</OPENCV_DIR>
-	<OPENCV_BIN>$(OPENCV_DIR)bin\</OPENCV_DIR>
+    <OPENCV_DIR>$(MSBuildThisFileDirectory)\..\native\</OPENCV_DIR>
+    <OPENCV_LIB>$(OPENCV_DIR)lib\</OPENCV_LIB>
+    <OPENCV_INC>$(OPENCV_DIR)include\</OPENCV_INC>
+    <OPENCV_BIN>$(OPENCV_DIR)bin\</OPENCV_BIN>
     <OPENCV_DLL_SYGN>opencv_world*.dll</OPENCV_DLL_SYGN>
   </PropertyGroup>
   <PropertyGroup>
@@ -13,8 +13,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies Condition="('$(Configuration)'=='LocalRelease' Or '$(Configuration)'=='LocalDebug') Or ('$(Configuration)'=='NativeRelease' Or '$(Configuration)'=='Release')">opencv_world330.lib;%(AdditionalDependencies)</AdditionalDependencies>
-	  <AdditionalDependencies Condition="('$(Configuration)'=='Debug' Or '$(Configuration)'=='NativeDebug')">opencv_world330d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="('$(Configuration)'=='LocalRelease' Or '$(Configuration)'=='LocalDebug') Or ('$(Configuration)'=='NativeRelease' Or '$(Configuration)'=='Release')">opencv_world346.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    <AdditionalDependencies Condition="('$(Configuration)'=='Debug' Or '$(Configuration)'=='NativeDebug')">opencv_world346d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OPENCV_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
