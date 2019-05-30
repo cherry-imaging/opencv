@@ -4,8 +4,8 @@
   <PropertyGroup Label="UserMacros">
     <OPENCV_DIR>$(MSBuildThisFileDirectory)\..\native\</OPENCV_DIR>
     <OPENCV_LIB>$(OPENCV_DIR)lib\</OPENCV_LIB>
-    <OPENCV_INC>$(OPENCV_DIR)include\</OPENCV_INC>
-    <OPENCV_BIN>$(OPENCV_DIR)bin\</OPENCV_BIN>
+	  <OPENCV_INC>$(OPENCV_DIR)include\</OPENCV_INC>
+	  <OPENCV_BIN>$(OPENCV_DIR)bin\</OPENCV_BIN>
     <OPENCV_DLL_SYGN>opencv_world*.dll</OPENCV_DLL_SYGN>
   </PropertyGroup>
   <PropertyGroup>
@@ -13,8 +13,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies Condition="('$(Configuration)'=='LocalRelease' Or '$(Configuration)'=='LocalDebug') Or ('$(Configuration)'=='NativeRelease' Or '$(Configuration)'=='Release')">opencv_world346.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    <AdditionalDependencies Condition="('$(Configuration)'=='Debug' Or '$(Configuration)'=='NativeDebug')">opencv_world346d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="('$(Configuration)'=='Release' Or '$(Configuration)'=='ReleaseDev') Or ('$(Configuration)'=='LocalDebug')">opencv_world330.lib;%(AdditionalDependencies)</AdditionalDependencies>
+	  <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">opencv_world330d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OPENCV_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
@@ -32,8 +32,11 @@
     </BuildMacro>
   </ItemGroup>
   <Target Name="CopyCvDllFiles" Condition="'$(SkipDataFiles)' != True">
-    <ItemGroup>
-      <CvDllFile Include="$(OPENCV_BIN)$(OPENCV_DLL_SYGN)" />
+    <ItemGroup Condition="('$(Configuration)'=='Release' Or '$(Configuration)'=='ReleaseDev') Or ('$(Configuration)'=='LocalDebug')">
+      <CvDllFile Include="$(OPENCV_BIN)opencv_world330.dll" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)'=='Debug'">
+      <CvDllFile Include="$(OPENCV_BIN)opencv_world330d.dll" />
     </ItemGroup>
     <Message Text="Coping OpenCV dll files" />
     <Copy SourceFiles="@(CvDllFile)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
