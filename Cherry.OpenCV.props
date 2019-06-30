@@ -7,14 +7,15 @@
 	  <OPENCV_INC>$(OPENCV_DIR)include\</OPENCV_INC>
 	  <OPENCV_BIN>$(OPENCV_DIR)bin\</OPENCV_BIN>
     <OPENCV_DLL_SYGN>opencv_world*.dll</OPENCV_DLL_SYGN>
+    <OPENCV_VER>#{DLL_VERSION}#</OPENCV_VER>
   </PropertyGroup>
   <PropertyGroup>
     <_PropertySheetDisplayName>OpenCV</_PropertySheetDisplayName>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies Condition="('$(Configuration)'=='Release' Or '$(Configuration)'=='ReleaseDev') Or ('$(Configuration)'=='LocalDebug')">opencv_world330.lib;%(AdditionalDependencies)</AdditionalDependencies>
-	  <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">opencv_world330d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="('$(Configuration)'=='Release' Or '$(Configuration)'=='ReleaseDev') Or ('$(Configuration)'=='LocalDebug')">opencv_world$(OPENCV_VER).lib;%(AdditionalDependencies)</AdditionalDependencies>
+	  <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">opencv_world$(OPENCV_VER)d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OPENCV_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
@@ -33,10 +34,10 @@
   </ItemGroup>
   <Target Name="CopyCvDllFiles" Condition="'$(SkipDataFiles)' != True">
     <ItemGroup Condition="('$(Configuration)'=='Release' Or '$(Configuration)'=='ReleaseDev') Or ('$(Configuration)'=='LocalDebug')">
-      <CvDllFile Include="$(OPENCV_BIN)opencv_world330.dll" />
+      <CvDllFile Include="$(OPENCV_BIN)opencv_world$(OPENCV_VER).dll" />
     </ItemGroup>
     <ItemGroup Condition="'$(Configuration)'=='Debug'">
-      <CvDllFile Include="$(OPENCV_BIN)opencv_world330d.dll" />
+      <CvDllFile Include="$(OPENCV_BIN)opencv_world$(OPENCV_VER)d.dll" />
     </ItemGroup>
     <Message Text="Coping OpenCV dll files" />
     <Copy SourceFiles="@(CvDllFile)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
